@@ -62,6 +62,10 @@ https://icetest.info/
 https://github.com/manuels/wireguard-p2p
 https://stackoverflow.com/questions/60425311/how-to-connect-to-peers-in-opendht
 
+### using dns txt cache as distributed storage for metdata instead of signaling server
+https://github.com/benjojo/dnsfs/blob/master/dnsfs/dns.go
+https://blog.benjojo.co.uk/post/dns-filesystem-true-cloud-storage-dnsfs
+
 ### links
 https://tailscale.com/blog/how-nat-traversal-works
 https://coder.com/docs/admin/networking/stun
