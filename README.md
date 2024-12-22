@@ -93,6 +93,13 @@ In the morning glad I see;
 My foe outstretched beneath the tree.
 ```
 
+### using mqtt as signaling server
+https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
+https://www.hivemq.com/mqtt/public-mqtt-broker/
+
+./gonet join <roomId>
+./gonet create <roomid>
+
 ### links
 https://tailscale.com/blog/how-nat-traversal-works
 https://coder.com/docs/admin/networking/stun
