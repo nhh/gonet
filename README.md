@@ -101,6 +101,10 @@ https://www.hivemq.com/mqtt/public-mqtt-broker/
 https://pkg.go.dev/go.etcd.io/etcd/server/v3/embed
 https://github.com/etcd-io/etcd/tree/main/client/v3 <--- use wg subnet to define all possible clients
 
+### pastebin as handshake / signaling server
+https://pastebin.com/
+
+
 ./gonet join <roomId>
 ./gonet create <roomid>
 
