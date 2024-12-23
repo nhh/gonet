@@ -97,6 +97,10 @@ My foe outstretched beneath the tree.
 https://www.emqx.com/en/blog/how-to-use-mqtt-in-golang
 https://www.hivemq.com/mqtt/public-mqtt-broker/
 
+### using etcd as shared brain
+https://pkg.go.dev/go.etcd.io/etcd/server/v3/embed
+https://github.com/etcd-io/etcd/tree/main/client/v3 <--- use wg subnet to define all possible clients
+
 ./gonet join <roomId>
 ./gonet create <roomid>
 
