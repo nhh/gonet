@@ -7,6 +7,28 @@
 gonet <lobby/room/key>
 ```
 
+## Handshake (with host verification)
+
+The host shares it's publickey to its clients. The publickey is alsow the mqtt topic where the host is listening on.
+The host is the only one, that can publish signed messages on that channel. So its authenticity is verifiable.
+
+The client publishes join information (name, publickey, ...) on the channel. The metadata is signed with its own publickey.
+
+The host can verifiy the publickey is signed by the user and adds the publickey to its configuration. (allow access)
+The host then publishes where the client can join as a signed message.
+
+The client receives the information, verifies its signature and initates a connection with the provided information
+
+```
+----joins room---->     [Client]                                                           [Host]
+                           ||       -----------------sendSignedMessage------------------>    || 
+                           ||                                                                || (verifies signature)                                                              
+                           ||                                                                || (adds client to config) 
+                           ||       <----------------respondsWithSignedMessage-----------    ||
+     (verifies signature)  ||
+     (initiates join)      ||
+```
+
 ## Debugging
 
 ### SO_REUSEADDR / SO_REUSEPORT
@@ -117,3 +139,7 @@ https://github.com/Schachte/userspace-wireguard-tunnels
 https://ryan-schachte.com/blog/userspace_wireguard_tunnels/ <---- good one!
 https://stackoverflow.com/questions/58129995/binding-a-udp-port-how-long-does-the-binding-persist-in-a-nat-environment
 https://www.digitalocean.com/community/tutorials/how-to-create-a-point-to-point-vpn-with-wireguard-on-ubuntu-16-04#creating-an-initial-configuration-file
+https://security.stackexchange.com/a/119843 <---- awesome asymmetric encryption information
+https://github.com/libp2p/go-libp2p
+https://github.com/webmeshproj/webmesh
+https://github.com/pojntfx/weron <------ awesome p2p webrtc wireguard alternative

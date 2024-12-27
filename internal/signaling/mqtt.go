@@ -21,6 +21,7 @@ var connectLostHandler mqtt.ConnectionLostHandler = func(client mqtt.Client, err
 	fmt.Printf("Connect lost: %v", err)
 }
 
+// in mqtt no one "needs" to create a room. you can publish stuff on topics
 func CreateRoom(name string) {
 	var broker = "broker.hivemq.com"
 	var port = 1883
@@ -39,6 +40,7 @@ func CreateRoom(name string) {
 		time.Sleep(1 * time.Second)
 		text := fmt.Sprintf("Message" + time.Now().Format("2006-01-02 15:04:05"))
 		token := client.Publish("topic/"+name, 0, false, text)
+		fmt.Printf("Published on: topic/%s\n", name)
 		token.Wait()
 	}
 
