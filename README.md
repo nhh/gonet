@@ -7,7 +7,7 @@
 gonet <lobby/room/key>
 ```
 
-## Handshake (with host verification)
+## Signalling or finding lobbies
 
 The host shares it's publickey to its clients. The publickey is alsow the mqtt topic where the host is listening on.
 The host is the only one, that can publish signed messages on that channel. So its authenticity is verifiable.
@@ -18,6 +18,43 @@ The host can verifiy the publickey is signed by the user and adds the publickey 
 The host then publishes where the client can join as a signed message.
 
 The client receives the information, verifies its signature and initates a connection with the provided information
+
+EDIT: The publickey does NOT need to be the name of the channel/room/id. The host can craft a message, that contains the publickey and sign the message itself with
+this publickey. The channel/room/id needs to be a substring of a secure hash of the host's publickey. 
+
+A client can generate the hash based on the provided publickey and verify the signature.
+
+`gonet join cf83e1`
+
+SHA-512 Hash of a public key
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+
+example client request and host response:
+
+```yaml
+version: 1
+---
+room: cf83e1 <---- used for sanity checks
+publicKey: "JGq1vBxd/HhPP/z9373bw6WTyE5UcJCT6WpSxkz4by4="
+action: "join" <---- desired action
+username: johndoe
+---
+signature: cff5ccf320b9bec2d7605d3b6d844c01
+```
+
+```yaml
+version: 1
+---
+room: cf83e1 <---- used for sanity checks
+peer: "10.0.0.23" <---- assigned ip address
+publickey: "39bUSCHAxRTdas7CKGwE9xDeKuPvQF+n9O8gEGPZdxg="
+method: "SHA-512" <---- verification method
+address: "109.42.114.166:56112" <---- public reachable nat hole, to initiate wireguard connection
+---
+signature: 58efdfcc74a98a8b4d63a7f48ed4bf27
+```
+
+
 
 ```
 ----joins room---->     [Client]                                                           [Host]
