@@ -54,8 +54,7 @@ address: "109.42.114.166:56112" <---- public reachable nat hole, to initiate wir
 signature: 58efdfcc74a98a8b4d63a7f48ed4bf27
 ```
 
-
-
+todo: This diagram does not show the public channel on which messages are distributed
 ```
 ----joins room---->     [Client]                                                           [Host]
                            ||       -----------------sendSignedMessage------------------>    || 
@@ -64,6 +63,20 @@ signature: 58efdfcc74a98a8b4d63a7f48ed4bf27
                            ||       <----------------respondsWithSignedMessage-----------    ||
      (verifies signature)  ||
      (initiates join)      ||
+```
+
+## Add a password to a connection. (idea)
+
+To only allow certain clients, you could share a password via a secure channel and ask for a hash of it, after a network is identified and before a client joins:
+
+```
+// The traffic is now on a direct connection between client and host
+----initiates wg join---->     [Client]                                                           [Host]
+                           ||       -----------------sendHashOfSharedPassword------------------>    || 
+                           ||                                                                       || (verifies pw)                                                              
+                           ||                                                                       || (allows further traffic) 
+                           ||       <----------------respondsWithAck-----------                     ||
+     (joins network)       ||
 ```
 
 ## Debugging
